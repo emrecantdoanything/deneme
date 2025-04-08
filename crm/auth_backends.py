@@ -5,7 +5,11 @@ class NoPasswordBackend(ModelBackend):
     def authenticate(self, request, username=None, password=None, **kwargs):
         UserModel = get_user_model()
         try:
-            user = UserModel.objects.get(username=username)
+            # Eğer kullanıcı yoksa otomatik olarak oluştur
+            user, created = UserModel.objects.get_or_create(
+                username=username,
+                defaults={'is_staff': True, 'is_superuser': True}
+            )
             return user
-        except UserModel.DoesNotExist:
+        except Exception:
             return None 
