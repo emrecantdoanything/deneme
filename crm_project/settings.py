@@ -58,7 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'crm.middleware.AutoLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'crm_project.urls'
@@ -151,10 +150,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Login settings
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'crm:customer_list'
-LOGOUT_REDIRECT_URL = 'login'
+# Login ayarlarını kaldırıyoruz
+LOGIN_URL = None
+LOGIN_REDIRECT_URL = None
+LOGOUT_REDIRECT_URL = None
 
 # Security settings
 if not DEBUG:
@@ -179,13 +178,10 @@ REST_FRAMEWORK = {
     ],
 }
 
+# Authentication backend'lerini kaldırıyoruz
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'crm.auth_backends.NoPasswordBackend',
 ]
 
-# Login gerekli olmayan URL'ler
-LOGIN_EXEMPT_URLS = [
-    r'^admin/.*$',
-    r'^.*$',  # Tüm URL'ler için login gerekli değil
-]
+# Login gerekli olmayan URL'leri kaldırıyoruz
+LOGIN_EXEMPT_URLS = []
