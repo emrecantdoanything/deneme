@@ -155,6 +155,22 @@ LOGIN_URL = None
 LOGIN_REDIRECT_URL = None
 LOGOUT_REDIRECT_URL = None
 
+# Authentication backend'lerini kaldırıyoruz
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Login gerekli olmayan URL'leri kaldırıyoruz
+LOGIN_EXEMPT_URLS = []
+
+# REST Framework ayarlarını güncelliyoruz
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+}
+
 # Security settings
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
@@ -166,19 +182,3 @@ if not DEBUG:
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
-
-# REST Framework ayarlarını güncelliyoruz
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [],
-}
-
-# Authentication backend'lerini kaldırıyoruz
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-]
-
-# Login gerekli olmayan URL'leri kaldırıyoruz
-LOGIN_EXEMPT_URLS = []
