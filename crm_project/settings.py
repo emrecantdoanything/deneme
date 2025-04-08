@@ -58,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'crm.middleware.AutoLoginMiddleware',
 ]
 
 ROOT_URLCONF = 'crm_project.urls'
@@ -181,4 +182,10 @@ REST_FRAMEWORK = {
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'crm.auth_backends.NoPasswordBackend',
+]
+
+# Login gerekli olmayan URL'ler
+LOGIN_EXEMPT_URLS = [
+    r'^admin/.*$',
+    r'^.*$',  # Tüm URL'ler için login gerekli değil
 ]
